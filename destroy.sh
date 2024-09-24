@@ -1,7 +1,8 @@
-#! /bin/zsh
+#! /bin/bash
+IFS=' ' read -r -a CLUSTERS_ARRAY <<< "$CLUSTERS"
 
 # Delete local clusters
-for cluster in ${=CLUSTERS}; do 
+for cluster in ${CLUSTERS_ARRAY[@]}; do 
   kind delete cluster --name $cluster 
 done
 
