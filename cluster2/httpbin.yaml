@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: httpbin-demo
+  labels:
+    kuma.io/sidecar-injection: enabled
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: httpbin-demo
+  name: httpbin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: httpbin-demo
+  name: httpbin-z2
+  labels:
+    app: httpbin
+    service: httpbin
+spec:
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8080
+  selector:
+    app: httpbin
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: httpbin-demo
+  name: httpbin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpbin
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: httpbin
+        version: v1
+    spec:
+      serviceAccountName: httpbin
+      containers:
+        - image: docker.io/kong/httpbin
+          imagePullPolicy: IfNotPresent
+          name: httpbin
+          # Same as found in Dockerfile's CMD but using an unprivileged port
+          command:
+            - gunicorn
+            - -b
+            - "[::]:8080"
+            - httpbin:app
+            - -k
+            - gevent
+          env:
+            # Tells pipenv to use a writable directory instead of $HOME
+            - name: WORKON_HOME
+              value: /tmp
+          ports:
+            - containerPort: 8080

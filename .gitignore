@@ -1,0 +1,6 @@
+*.crt
+*.key
+.envrc
+.terraform/
+.terraform*
+terraform.tfstate*

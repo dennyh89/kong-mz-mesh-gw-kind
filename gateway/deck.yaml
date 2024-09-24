@@ -1,0 +1,41 @@
+_format_version: "3.0"
+services:
+  - host: httpbin-z1.httpbin-demo.svc.8000.mesh
+    name: httpbin-cluster1
+    port: 80
+    protocol: http
+    routes:
+      - name: httpbin-cluster1
+        path_handling: v0
+        paths:
+          - /cluster1/httpbin
+        protocols:
+          - http
+          - https
+        strip_path: true
+  - host: httpbin-z2.httpbin-demo.svc.8000.mesh
+    name: httpbin-cluster2
+    port: 80
+    protocol: http
+    routes:
+      - name: httpbin-cluster2
+        path_handling: v0
+        paths:
+          - /cluster2/httpbin
+        protocols:
+          - http
+          - https
+        strip_path: true
+  - host: demo-app.kuma-demo.svc.5000.mesh
+    name: demo-app
+    port: 80
+    protocol: http
+    routes:
+      - name: demo-app-cluster2
+        path_handling: v0
+        paths:
+          - /cluster2/demo-app
+        protocols:
+          - http
+          - https
+        strip_path: true

@@ -1,0 +1,9 @@
+export CLUSTERS="cluster1 cluster2"
+
+export KONNECT_TOKEN="kpat_ABCD"
+
+export KONNECT_REGION="eu"
+export KONNECT_SERVER_URL="https://${KONNECT_REGION}.api.konghq.com"
+
+export DECK_KONNECT_ADDR="${KONNECT_SERVER_URL}"
+export DECK_KONNECT_TOKEN="${KONNECT_TOKEN}"

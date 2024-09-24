@@ -1,0 +1,15 @@
+kuma:
+  controlPlane:
+    mode: zone
+    zone: cluster1
+    kdsGlobalAddress: grpcs://eu.mesh.sync.konghq.com:443
+    konnect:
+      cpId: <CP_ID>
+    secrets:
+      - Env: KMESH_MULTIZONE_ZONE_KDS_AUTH_CP_TOKEN_INLINE
+        Secret: cp-token
+        Key: token
+  ingress:
+    enabled: true
+  egress:
+    enabled: true
