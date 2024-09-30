@@ -1,5 +1,8 @@
 kuma:
   controlPlane:
+    envVars:
+      # Enables Mesh Service generation which we use for enabling a HostNameGenerator
+      KUMA_EXPERIMENTAL_GENERATE_MESH_SERVICES: true
     mode: zone
     zone: cluster1
     kdsGlobalAddress: grpcs://eu.mesh.sync.konghq.com:443

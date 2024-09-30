@@ -81,6 +81,7 @@ terraform -chdir=terraform apply
 ## Configure kumactl and apply defaults
 
 Target kumactl to new Mesh control-plane and create a default allow-all MeshTraficPolicy to ensure traffic can flow after enabling mTLS (which is a requirement for multi-zone communication).
+global-hostnames.yaml creates a HostNameGenerator that creates custom hostnames for services labelled with "with-global-name: true". For this to work the mesh needs to have `KUMA_EXPERIMENTAL_GENERATE_MESH_SERVICES=true`(with mesh v 2.8) set in the helm values.yaml.
 
 ```
   kumactl config control-planes add \
@@ -90,6 +91,7 @@ Target kumactl to new Mesh control-plane and create a default allow-all MeshTraf
 
   kumactl apply -f mesh-global/mtp-allow-all.yaml
   kumactl apply -f mesh-global/mesh-with-mtls.yaml
+  kumactl apply -f mesh-global/global-hostnames.yaml
 ```
 
 

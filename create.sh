@@ -18,6 +18,7 @@ kumactl config control-planes add \
 
 kumactl apply -f mesh-global/mtp-allow-all.yaml
 kumactl apply -f mesh-global/mesh-with-mtls.yaml
+kumactl apply -f mesh-global/global-hostnames.yaml
 
 
 # Connect zones to Konnect

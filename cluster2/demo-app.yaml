@@ -41,10 +41,14 @@ kind: Service
 metadata:
   name: demo-app
   namespace: kuma-demo
+  labels:
+    # we use this label to have this service picked up for global hostname generation
+    with-global-name: "true"
 spec:
   selector:
     app: demo-app
   ports:
-  - protocol: TCP
-    appProtocol: http
-    port: 5000
+    - protocol: TCP
+      appProtocol: http
+      port: 5000
+      targetPort: 5000

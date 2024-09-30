@@ -1,0 +1,12 @@
+# registers a global hostname within the mesh (in 2.8 only if explicitly Enabled KUMA_EXPERIMENTAL_GENERATE_MESH_SERVICES=true)
+type: HostnameGenerator
+name: global-name
+namespace: kuma-system
+labels:
+  kuma.io/mesh: "default"
+spec:
+  selector:
+    meshService:
+      matchLabels:
+        with-global-name: "true"
+  template: "{{ .DisplayName }}.mesh"

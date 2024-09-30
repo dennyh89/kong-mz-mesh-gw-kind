@@ -26,9 +26,9 @@ services:
           - http
           - https
         strip_path: true
-  - host: demo-app.kuma-demo.svc.5000.mesh
+  - host: demo-app.mesh # use the unified mesh hostname that is defined by the hostname generator
     name: demo-app
-    port: 80
+    port: 5000
     protocol: http
     routes:
       - name: demo-app-cluster2
